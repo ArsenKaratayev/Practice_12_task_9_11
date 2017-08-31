@@ -35,6 +35,19 @@ namespace Practice_12_task_9_11
             }
             Console.WriteLine();
         }
+
+        static int[,] MakeSortedTree(int[] mas, int elem, int maxElem)
+        {//функция, строящая сортировочное дерево
+            int maxDescendant = elem;//индекс максимального из двух потомков данного элемента
+            int LeftDescendant=elem*2+1;//индекс левого потомка данного элемента
+            int RightDescendant=elem*2+2;//индекс правого потомка данного элемента
+            do
+            {
+                if (mas[LeftDescendant] > mas[RightDescendant]) maxDescendant = LeftDescendant;
+                else maxDescendant = RightDescendant;
+
+            } while (LeftDescendant != maxElem);
+        }
         static void Main(string[] args)
         {
             //int[] mas = { 4, 6, 7, 10, 7, 0, 9 };

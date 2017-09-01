@@ -58,7 +58,7 @@ namespace Practice_12_task_9_11
                 {
                     maxDescendant = LeftDescendant;
                     //compare++;
-                }//если мы дошли до последнего элемента в неотсортированной части и правый потомок уже в отсортированной части   
+                }
                 else//если мы еще не дошли до конца неотсортированной части и правый потомок тоже находится в ней
                 if (mas[LeftDescendant] > mas[RightDescendant])//находим максимальный элемент и  записываем его индекс в maxDescendant
                 {
@@ -73,11 +73,11 @@ namespace Practice_12_task_9_11
                     //compare++;
                 }
 
-                if (mas[maxDescendant] <= mas[elem])
+                if (mas[maxDescendant] <= mas[elem])//если потомок не больше данного элемента, то заканчивам построение сортировочного дерева
                 {
                     compare++;
                     break;                    
-                }//если потомок не больше данного элемента, то заканчивам построение сортировочного дерева
+                }
                 else//если потомок больше данного элемента, то меняем их местами
                 {
                     int k = mas[elem];//вспомогательна переменная
@@ -129,12 +129,14 @@ namespace Practice_12_task_9_11
             SimpleChoiceSorting(mas);
             PyramidalSorting(mas);
             Console.ReadLine();
+            //массив упорядоченный по убыванию
             Console.WriteLine("Массив, упорядоченный по убыванию:");
             int[] mas1 = { 19, 13, 12, 10, 7, 5, 1, -5, -3, -10 };
             WriteMas(mas1);
             SimpleChoiceSorting(mas1);
             PyramidalSorting(mas1);
             Console.ReadLine();
+            //массив упорядоченный по возрастанию
             Console.WriteLine("Массив,упорядоченный по возрастанию:");
             int[] mas2 = { -7, -4, 0, 2, 5, 17, 22, 123, 1234, 5666, 9000 };
             WriteMas(mas2);

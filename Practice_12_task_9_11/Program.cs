@@ -46,7 +46,7 @@ namespace Practice_12_task_9_11
             }
             compare++;
             Console.WriteLine("Массив, отсортированный с методом простого выбора: ");
-            WriteMas(mas);
+           // WriteMas(mas);
             Console.WriteLine("Количество сравнений: " + compare);
             Console.WriteLine("Количество пересылок: " + changes);
         }
@@ -59,24 +59,23 @@ namespace Practice_12_task_9_11
 
             while (LeftDescendant < maxElem)//пока не дойдем до границы неотсортированной части массива
             {
+                compare++;
                 if (RightDescendant >= maxElem)//если мы дошли до последнего элемента в неотсортированной части и правый потомок уже в отсортированной части
                 {
-                    maxDescendant = LeftDescendant;
-                    //compare++;
+                    maxDescendant = LeftDescendant;                    
                 }
                 else//если мы еще не дошли до конца неотсортированной части и правый потомок тоже находится в ней
                 if (mas[LeftDescendant] > mas[RightDescendant])//находим максимальный элемент и  записываем его индекс в maxDescendant
                 {
                     maxDescendant = LeftDescendant;
                     compare ++;
-                    //compare++;
                 }
                 else
                 {
                     maxDescendant = RightDescendant;
                     compare++;
-                    //compare++;
                 }
+                compare++;
 
                 if (mas[maxDescendant] <= mas[elem])//если потомок не больше данного элемента, то заканчивам построение сортировочного дерева
                 {
@@ -95,6 +94,7 @@ namespace Practice_12_task_9_11
                 }
                 compare++;
             }
+            compare++;
             return mas;
         }
 
@@ -105,11 +105,16 @@ namespace Practice_12_task_9_11
             int compare = 0;
             //первый этап: составляем пирамиду, прогоняя по не ней элементы, имеющие потомков, начиная с самого нижнего
             for (int i = mas.Length / 2 - 1; i >= 0; i--)
-                mas = MakeSortedTree(mas, mas.Length, i, ref compare, ref changes);//нижней границы пока нет, так как массив еще не начали сортировать
+            {
+                compare++;
+                mas = MakeSortedTree(mas, mas.Length, i, ref compare, ref changes);//нижней границы пока нет, так как массив еще не начали сортировать               
+            }
+            compare++;
 
             //второй этап: меняем местами первый и последний в неотсортированной части, затем прогоняем новый верхний элемент, составляя пирамиду
             for (int i=mas.Length-1; i>=1; i--)
             {
+                compare++;
                 //меняем местами верхний и нижний элементы неотсортированной части (последний элемент - новый край отсортированной части)
                 int k = mas[i];
                 mas[i] = mas[0];
@@ -118,8 +123,9 @@ namespace Practice_12_task_9_11
                 //составляем пирамиду, передвинув нижний край на один влево. Прогоняем по ней верхний элемент
                 mas = MakeSortedTree(mas, i, 0, ref compare, ref changes);
             }
+            compare++;
             Console.WriteLine("Массив, отсортированный с помощью пирамидальной сортировки:");
-            WriteMas(mas);
+            //WriteMas(mas);
             Console.WriteLine("Количество сравнений: " + compare);
             Console.WriteLine("Количество пересылок: " + changes);
             Console.WriteLine();
@@ -127,24 +133,32 @@ namespace Practice_12_task_9_11
 
         static void Main(string[] args)
         {
+            const int N = 10000;
+            Random rnd = new Random();
+            int[] mas = new int[N];
+            int[] mas1 = new int[N];
+            int[] mas2 = new int[N];
+            for (int i = 0; i <N; i++)
+            {
+                mas[i] = rnd.Next(-N, N);
+                mas1[i] = 50 - i;
+                mas2[i] = i - 50;
+            }
             //массив неупорядоченный
-            Console.WriteLine("Массив неупорядоченный:");
-            int[] mas = {0, 8, 10, 67, 345, 0, 1, 3, 6, 2, -5, 4};
-            WriteMas(mas);
+            Console.WriteLine("Массив из 10000 элементов, неупорядоченный:");            
+            //WriteMas(mas);
             SimpleChoiceSorting(mas);
             PyramidalSorting(mas);
             Console.ReadLine();
             //массив упорядоченный по убыванию
-            Console.WriteLine("Массив, упорядоченный по убыванию:");
-            int[] mas1 = { 19, 13, 12, 10, 7, 5, 1, -5, -3, -10 };
-            WriteMas(mas1);
+            Console.WriteLine("Массив из 10000 элементов, упорядоченный по убыванию:");
+            //WriteMas(mas1);
             SimpleChoiceSorting(mas1);
             PyramidalSorting(mas1);
             Console.ReadLine();
             //массив упорядоченный по возрастанию
-            Console.WriteLine("Массив,упорядоченный по возрастанию:");
-            int[] mas2 = { -7, -4, 0, 2, 5, 17, 22, 123, 1234, 5666, 9000 };
-            WriteMas(mas2);
+            Console.WriteLine("Массив из 10000 элементов, упорядоченный по возрастанию:");
+            //WriteMas(mas2);
             SimpleChoiceSorting(mas2);
             PyramidalSorting(mas2);
             Console.ReadLine();

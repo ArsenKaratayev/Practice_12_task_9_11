@@ -24,10 +24,12 @@ namespace Practice_12_task_9_11
             int mini;//индекс минимального элемента в неотсортированной части массива
             for (int i=0; i<mas.Length; i++)//сдвигаем край отсортированной части массива вправо
             {
+                compare++;
                 min = mas[i];
                 mini = i;
                 for (int j=i+1; j<mas.Length; j++)//перебираем неотсортированную часть массива
                 {
+                    compare++;
                     if (min>mas[j])//ищем минимальный элемент в неотсортированной части
                     {                       
                         min = mas[j];
@@ -35,11 +37,14 @@ namespace Practice_12_task_9_11
                     }
                     compare++;
                 }
+                compare++;
                 int k = mas[i];//вспомогательная переменная для пересылки
                 mas[i] = min;//меняем минимальный элемент и первый в неотсортированной части местами
-                mas[mini] = k;      
-                if (mini!=i) changes++;
+                mas[mini] = k;
+                if (mini!=i) 
+                changes++;
             }
+            compare++;
             Console.WriteLine("Массив, отсортированный с методом простого выбора: ");
             WriteMas(mas);
             Console.WriteLine("Количество сравнений: " + compare);
